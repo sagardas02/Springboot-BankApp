@@ -1,6 +1,8 @@
 # Create Cluster on EKS
 
-$ eksctl create cluster --name=bankapp-cluster --region=eu-west-1 --version=1.31 --without-nodegroup
+```bash
+ eksctl create cluster --name=bankapp-cluster --region=eu-west-1 --version=1.31 --without-nodegroup
+ ```
 
 # Install Kubectl on linux
 
