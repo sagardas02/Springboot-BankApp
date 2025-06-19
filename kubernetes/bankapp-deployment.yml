@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankapp-deployment
+  namespace: bankapp-namespace
+  labels:
+    app: bankapp-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bankapp-deploy
+  template:
+    metadata:
+      labels:
+        app: bankapp-deploy
+    spec:
+      containers:
+      - name: bankapp
+        image: sagar4work/bankapp-eks:v1
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 8080 
+        env:
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: SPRING_DATASOURCE_URL
+              name: bankapp-config
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              key: SPRING_DATASOURCE_USERNAME
+              name: bankapp-config
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: SPRING_DATASOURCE_PASSWORD
+              name: bankapp-config
