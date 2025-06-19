@@ -1,19 +1,21 @@
 # Create Cluster on EKS
 
 ```bash
- eksctl create cluster --name=bankapp-cluster --region=eu-west-1 --version=1.31 --without-nodegroup
+eksctl create cluster --name=bankapp-cluster --region=eu-west-1 --version=1.31 --without-nodegroup
  ```
 
 # Install Kubectl on linux
-
-$ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-
+```bash
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+```
+```bash
 $ chmod +x kubectl
 $ mkdir -p ~/.local/bin
 $ mv ./kubectl ~/.local/bin/kubectl
-
+```
+```bash
 $ kubectl version --client
-
+```
 # OpenID Connect
 
 $ eksctl utils associate-iam-oidc-provider --region=eu-west-1 --cluster=bankapp-cluster --approve
