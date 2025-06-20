@@ -25,17 +25,17 @@ spec:
           valueFrom:
             secretKeyRef:
               key: MYSQL_ROOT_PASSWORD
-              name: bankapp-secrets
+              name: mysql-secret
         - name: MYSQL_DATABASE
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               key: MYSQL_DATABASE
               name: bankapp-config
         volumeMounts:
         - name: mysql-pv-storage
           mountPath: /var/lib/mysql
           subPath: mysql-data
-    volumes:
-    - name: mysql-pv-storage
-      persistentVolumeClaim:
-        claimName: mysql-data
+      volumes:
+      - name: mysql-pv-storage
+        persistentVolumeClaim:
+          claimName: mysql-data
