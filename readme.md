@@ -1,3 +1,77 @@
+# Install java for jenkins
+```bash
+sudo apt update
+sudo apt install fontconfig openjdk-21-jre
+java -version
+```
+# Install jenkins
+```bash
+sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/jenkins.io-2023.key
+echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" https://pkg.jenkins.io/debian binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+```
+# Change the jenkins port 
+```bash
+sudo vim /usr/lib/systemd/system/jenkins.service     #change the Environment="JENKINS_PORT=8080" [default]
+```
+# Restart jenkins and daemon-reload
+```bash
+sudo systemctl daemon-reload
+```
+```bash
+sudo systemctl restart jenkins
+```
+```bash
+systemctl status jenkins
+```
+# Allow inbound rules in ec2 instance of jenkins port
+
+# Add credentials of dockerhub and others in jenkins UI in browser
+
+# Add jenkins user to docker group to get access
+```bash
+sudo usermod -aG docker jenkins && newgrp docker
+```
+```bash
+sudo systemctl restart jenkins
+```
+
+# Install SonarQube
+```bash
+docker run -itd --name SonarQube-Server -p 9000:9000 sonarqube:lts-community
+```
+# add sonarqube port in security group of ec2 instance
+
+# Install AWS CLI 
+```bash
+sudo apt  install awscli
+```
+# Configure the aws configure file 
+```bash
+aws configure
+```
+# Create a install_eksctl.sh file and paste this command
+
+```bash
+# for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+
+curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+
+# (Optional) Verify checksum
+curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+
+sudo mv /tmp/eksctl /usr/local/bin
+```
+# Give permission to install_eksctl.sh file
+```bash
+sudo 700 install_eksctl.sh
+./install_eksctl.sh
+```
 # Create Cluster on EKS
 
 ```bash
@@ -120,42 +194,4 @@ kubectl apply -f cert-issuer.yml
 ```
 ```bash
 kubectl describe certificate bankapp-tls-secret -n bankapp-namespace
-```
-# Install java for jenkins
-```bash
-sudo apt update
-sudo apt install fontconfig openjdk-21-jre
-java -version
-```
-# Install jenkins
-```bash
-sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/jenkins.io-2023.key
-echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" https://pkg.jenkins.io/debian binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt-get update
-sudo apt-get install jenkins
-```
-# Change the jenkins port 
-```bash
-sudo vim /usr/lib/systemd/system/jenkins.service     #change the Environment="JENKINS_PORT=8080" [default]
-```
-# Restart jenkins and daemon-reload
-```bash
-sudo systemctl daemon-reload
-```
-```bash
-sudo systemctl restart jenkins
-```
-```bash
-systemctl status jenkins
-```
-# Allow inbound rules in ec2 instance of jenkins port
-
-# Add credentials of dockerhub and others in jenkins UI in browser
-
-# Add jenkins user to docker group to get access
-```bash
-sudo usermod -aG docker jenkins && newgrp docker
-```
-```bash
-sudo systemctl restart jenkins
 ```
