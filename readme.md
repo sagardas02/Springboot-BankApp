@@ -83,6 +83,15 @@ eksctl create cluster --name=bankapp-cluster --region=eu-west-1 --version=1.31 -
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 ```
 ```bash
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+```
+```bash
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+```
+```bash
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+```bash
 chmod +x kubectl
 mkdir -p ~/.local/bin
 mv ./kubectl ~/.local/bin/kubectl
@@ -97,7 +106,7 @@ eksctl utils associate-iam-oidc-provider --region=eu-west-1 --cluster=bankapp-cl
 
 # Creating EKS Node Group
 ```bash
-eksctl create nodegroup --cluster=bankapp-cluster --region=eu-west-1 --name=bankapp-ng --node-type=t2.micro --nodes=2 --nodes-min=1 --nodes-max=2 --node-volume-size=15 --ssh-access --ssh-public-key=bankapp-automate-key
+eksctl create nodegroup --cluster=bankapp-cluster --region=eu-west-1 --name=bankapp-ng --node-type=t2.micro --nodes=2 --nodes-min=1 --nodes-max=2 --node-volume-size=15 --ssh-access --ssh-public-key=bank-app-terra-key
 ```
 # Apply namespace
 ```bash
