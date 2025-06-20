@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: bankapp
-        image: sagar4work/bankapp-eks:v1
+        image: sagar4work/bankapp:v1
         resources:
           requests:
             memory: "512Mi"
