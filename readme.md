@@ -118,7 +118,7 @@ kubectl create namespace argocd
 ```
 # Apply argocd menifest files
 ```bash
-kubectl apply -k https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 # Install ArgoCD CLI
 ```bash
