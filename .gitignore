@@ -3,3 +3,4 @@ terraform/ec2-terra-app-key
 terraform/terraform.tfstate
 terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/6.0.0-beta3/windows_386/LICENSE.txt
 terraform/.terraform/providers/registry.terraform.io/hashicorp/aws/6.0.0-beta3/windows_386/terraform-provider-aws_v6.0.0-beta3_x5.exe
+terraform/terraform.tfstate.backup
