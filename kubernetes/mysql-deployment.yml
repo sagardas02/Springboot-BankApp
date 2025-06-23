@@ -25,7 +25,7 @@ spec:
           valueFrom:
             secretKeyRef:
               key: MYSQL_ROOT_PASSWORD
-              name: bankapp-secrets
+              name: mysql-secret
         - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
