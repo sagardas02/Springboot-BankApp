@@ -28,7 +28,7 @@ spec:
               name: mysql-secret
         - name: MYSQL_DATABASE
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               key: MYSQL_DATABASE
               name: bankapp-config
         volumeMounts:
