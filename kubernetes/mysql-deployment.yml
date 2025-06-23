@@ -35,7 +35,7 @@ spec:
         - name: mysql-pv-storage
           mountPath: /var/lib/mysql
           subPath: mysql-data
-    volumes:
-    - name: mysql-pv-storage
-      persistentVolumeClaim:
-        claimName: mysql-data
+      volumes:
+      - name: mysql-pv-storage
+        persistentVolumeClaim:
+          claimName: mysql-data
