@@ -204,3 +204,4 @@ kubectl apply -f cert-issuer.yml
 ```bash
 kubectl describe certificate bankapp-tls-secret -n bankapp-namespace
 ```
+#ffff
