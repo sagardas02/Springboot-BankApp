@@ -3,16 +3,19 @@
 pipeline{
     agent any;
     environment {
-        dockerhubuser = 'your-dockerhub-username'  // Replace with actual username or use a parameter
-        imagename = 'your-image-name'   
-        imagetag = "image tag dew bro"           // Replace with actual image name
+        dockerhubuser = 'sagar4work'  
+        imagename = 'bankapp'   
+        imagetag = "v${BUILD_NUMBER}"   
+        
+        gitBranch = "prd"
+        
     }
 
     stages{
         stage("code clone"){
             steps{
                 script{
-                    gitClone("url","branch")
+                    gitClone("https://github.com/sagardas02/Springboot-BankApp.git","prd")
                 }
             }
         }
@@ -29,6 +32,20 @@ pipeline{
             steps{
                 script{
                     docker_push(env.dockerhubuser,env.imagename,env.imagetag)
+                }
+            }
+        }
+                stage('Update Kubernetes Manifests') {
+            steps {
+                script {
+                    update_k8s_manifests(
+                        imageTag: env.imagetag,
+                        manifestsPath: 'kubernetes',
+                        gitCredentials: 'githubCredentials',
+                        gitUserName: 'sagardas02',
+                        gitUserEmail: 'sagardas4work@gmail.com',
+                        gitBranch: env.gitBranch
+                    )
                 }
             }
         }
