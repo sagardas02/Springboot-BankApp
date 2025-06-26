@@ -37,12 +37,6 @@ sudo usermod -aG docker jenkins && newgrp docker
 sudo systemctl restart jenkins
 ```
 
-# Install SonarQube
-```bash
-docker run -itd --name SonarQube-Server -p 9000:9000 sonarqube:lts-community
-```
-# add sonarqube port in security group of ec2 instance
-
 # Install AWS CLI 
 ```bash
 sudo apt  install awscli
@@ -160,7 +154,7 @@ argocd cluster add [cluster name] --name [cluster name you want to set]
 ```
 # Connect repo in argocd ui [2:32:40]
 
-# Installing helm 
+<!-- # Installing helm 
 ```bash
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
@@ -203,4 +197,4 @@ kubectl apply -f cert-issuer.yml
 ```
 ```bash
 kubectl describe certificate bankapp-tls-secret -n bankapp-namespace
-```
+``` -->
